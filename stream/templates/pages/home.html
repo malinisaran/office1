@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet">
+    <script src="https://vjs.zencdn.net/7.17.0/video.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link href="https://unpkg.com/@silvermine/videojs-quality-selector/dist/css/quality-selector.css" rel="stylesheet">
+    <script src="./path/to/video.min.js"></script>
+    <script src="https://unpkg.com/@silvermine/videojs-quality-selector/dist/js/silvermine-videojs-quality-selector.min.js"></script>
+
+    <link href="style.css" rel="stylesheet">
+    <style>
+        .vjs-default-skin{
+        margin: 30px;
+        width: 1100px;
+        height: 700px;
+        align-items: center;
+        position:relative;
+        margin-left: 25%;
+    }
+    h1{
+        text-align: center;
+    }
+    </style>
+    <title>Streaming</title>
+</head>
+<body>
+    <h1>VIDEO STREAMING</h1>
+    <!-- <video id ="player" class="video-js vjs-default-skin" height="360" width="640" controls preload="none">
+    <source src="http://localhost:8000/media/video/14/hls/hls.m3u8" type="application/x-mpegURL"/>
+    </video>  -->
+    <!-- <video id="player" class="video-js vjs-default-skin" controls preload="auto" width="640" height="268" data-setup='{}'>
+        <source src="http://localhost:8000/video/1/hls/480/hls.m3u8" type="application/x-mpegURL" label="144P">
+       
+     </video> -->
+     <video id="video_1" class="video-js vjs-default-skin" controls preload="auto">
+     </video>
+    </body>
+
+<script>
+    // var player = videojs(player)
+    videojs("video_1", {}, function() {
+    var player = this;
+
+    player.controlBar.addChild('QualitySelector');
+
+   setTimeout(() => {
+      videojs.Vhs.xhr.beforeRequest = function(options) {
+         options.headers = options.headers || {};
+         options.headers.Authorization = 'Bearer token';
+         console.log('options', options)
+         return options;
+      };
+      player.src([
+         {
+            src: 'http://localhost:8000/media/video/1/hls/360/hls.m3u8',
+            type: "application/x-mpegURL",
+            label: '360P',
+            selected: true,
+         },
+         {
+            src: 'http://localhost:8000/media/video/1/hls/480/hls.m3u8',
+            type: "application/x-mpegURL",
+            label: '480P',
+         },
+         {
+            src: 'http://localhost:8000/media/video/1/hls/720/hls.m3u8',
+            type: "application/x-mpegURL",
+            label:'720p',
+         },
+         {
+            src: 'http://localhost:8000/media/video/1/hls/1080/hls.m3u8',
+            type: "application/x-mpegURL",
+            label: '1080P',
+         },
+    ]);
+
+    }, 2000);
+
+});
+</script>
+</html>

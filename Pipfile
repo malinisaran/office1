@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+cryptography = "*"
+django-cors-headers = "*"
+django-allauth = "*"
+dj-rest-auth = "*"
+python-ffmpeg-video-streaming = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"

@@ -1,0 +1,22 @@
+### registration
+POST http://127.0.1:8000/auth/registration/HTTP/1.1
+
+Content-Type: application/json
+
+{
+    "username": "testuser222",
+    "password1":"testpassword"
+    "password2":"testpassword"
+    "email":"djangotest2@django.com"
+}
+
+###login
+POST http://127.0.1:8000/auth/login/HTTP/1.1
+
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "password1":"testpassword",
+    "email":"djangotest2@django.com"
+}
